@@ -1,5 +1,13 @@
 require "simply_notify/version"
+require "action_mailer"
 
-module SimplyNotify
-  # Your code goes here...
+class Notifier < ActionMailer::Base
+  default :from => 'no-reply@brandeis.edu'
+
+  def new_notification(recipient)
+    @recipient = recipient
+    mail(:to => recipient, 
+      	 :subject => 'New Notification',
+         :content_type => 'text/html')
+  end
 end

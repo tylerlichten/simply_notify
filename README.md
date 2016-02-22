@@ -1,8 +1,7 @@
 # SimplyNotify
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/simply_notify`. To experiment with that code, run `bin/console` for an interactive prompt.
+simply_notify will send a user of the course website an email notifying the user of a new notification that has been posted to their account. 
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -20,22 +19,60 @@ Or install it yourself as:
 
     $ gem install simply_notify
 
+
 ## Usage
 
-TODO: Write usage instructions here
+In your app, create a new model. For example: 
 
-## Development
+	notifier.rb
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+In the model you created (notifier.rb), add:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+	require 'simply_notify'
+
+Create mailer views in your app. For example: 
+
+	app/views/notifier/new_notification.text.erb
+
+	AND
+
+	app/views/notifier/new_notification.html.erb
+
+In the views you created, place a message such as this:
+	
+	Hello <%= @recipient %>,
+	You have a new notification! Please visit the course website.
+	Thanks.
+
+	AND
+
+	<!DOCTYPE html>
+	<html>
+  	  <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+      </head>
+      <body>
+        <h1>Hello <%= @user.name %></h1>
+        <p>
+          You have a new notification! Please visit the course website.<br>
+          Thanks.<br>
+        </p>
+      </body>
+    </html>
+
+
+Finally, call a variation of this from the controller where notifications are created, right after the notifcation is saved:
+
+	Notifier.new_notification(@recipient).deliver_now
+
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/simply_notify.
+Bug reports and pull requests are welcome on GitHub at https://github.com/tylerlichten/simply_notify.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
 
