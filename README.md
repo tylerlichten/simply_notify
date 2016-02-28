@@ -1,6 +1,6 @@
 # SimplyNotify
 
-simply_notify will send a user of the course website an email notifying the user of a new notification that has been posted to their account. 
+simply_notify will send a user of the Brandeis University course website an email notifying the user of a new notification that has been posted to their account. 
 
 
 ## Installation
@@ -22,23 +22,11 @@ Or install it yourself as:
 
 ## Usage
 
-In your app, create a new model. For example: 
+Create the model and views using the generator:
 
-	notifier.rb
+	rails generate notifier
 
-In the model you created (notifier.rb), add:
-
-	require 'simply_notify'
-
-Create mailer views in your app. For example: 
-
-	app/views/notifier/new_notification.text.erb
-
-	AND
-
-	app/views/notifier/new_notification.html.erb
-
-In the views you created, place a message such as this:
+In the views (text and html respectively), place a message such as this:
 	
 	Hello <%= @recipient %>,
 	You have a new notification! Please visit the course website.

@@ -21,4 +21,3 @@ describe SimplyNotify do
     expect(ActionMailer::Base.deliveries.from).to eq('no-reply@brandeis.edu')
   end
 end
-
