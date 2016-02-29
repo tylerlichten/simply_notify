@@ -27,12 +27,27 @@ Create the model and views using the generator:
 	rails generate notifier
 
 
-Place a call in the controller where notifications should be created to loop through users emails, after the notifcation is saved:
+Place a call in the controller in which you want notifications to be created. For example, if you want each user to be notified when an assignment is created, use a call such as this:
 
 	@users = User.all 
     @users.each do |u| 
       Notifier.new_notification(u.email).deliver_now
     end
+
+
+Add config SMTP code to appropriate environments. For example, sending emails from a gmail account:
+
+    # SMTP Config
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true 
+    config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'YOUR_USERNAME@gmail.com',
+    password:             'YOUR_PASSWORD',
+    authentication:       'plain',
+    enable_starttls_auto: true  }
 
 
 ## Contributing

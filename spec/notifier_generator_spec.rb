@@ -8,7 +8,7 @@ describe NotifierGenerator, type: :generator do
   end
 
   it "creates Model" do
-    assert_file "app/models/notifier.rb", "require 'simply_notify'"
+    assert_file "app/mailers/notifier.rb", "require 'simply_notify'"
   end
 
   it "creates View for html" do
@@ -19,9 +19,9 @@ describe NotifierGenerator, type: :generator do
           <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
         </head>
         <body>
-          <h1>Hello <%= @recipient %></h1>
+          <h1>Hello</h1>
           <p>
-            You have a new notification! Please visit the course website.<br>
+            A new assignment has been posted! Please visit the course website.<br>
             Thanks.<br>
           </p>
         </body>
@@ -30,8 +30,8 @@ describe NotifierGenerator, type: :generator do
 
   it "creates View for text" do
     assert_file "app/views/notifier/new_notification.text.erb", 
-     "Hello <%= @recipient %>, 
-      You have a new notification! Please visit the course website.
+     "Hello, 
+      A new assignment has been posted! Please visit the course website.
       Thanks."
   end
 end
