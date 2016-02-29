@@ -8,7 +8,7 @@ describe NotifierGenerator, type: :generator do
   end
 
   it "creates Model" do
-    assert_file "app/model/notifier.rb", "require 'simply_notify'"
+    assert_file "app/models/notifier.rb", "require 'simply_notify'"
   end
 
   it "creates View for html" do
