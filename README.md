@@ -26,32 +26,10 @@ Create the model and views using the generator:
 
 	rails generate notifier
 
-In the views (text and html respectively), place a message such as this:
-	
-	Hello <%= @recipient %>,
-	You have a new notification! Please visit the course website.
-	Thanks.
 
-	AND
+Place a call in the controller where notifications are created, after the notifcation is saved:
 
-	<!DOCTYPE html>
-	<html>
-  	  <head>
-        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-      </head>
-      <body>
-        <h1>Hello <%= @user.name %></h1>
-        <p>
-          You have a new notification! Please visit the course website.<br>
-          Thanks.<br>
-        </p>
-      </body>
-    </html>
-
-
-Finally, call a variation of this from the controller where notifications are created, right after the notifcation is saved:
-
-	Notifier.new_notification(@recipient).deliver_now
+	Notifier.new_notification(@user).deliver_now
 
 
 ## Contributing

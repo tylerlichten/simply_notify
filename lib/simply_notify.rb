@@ -6,7 +6,7 @@ class Notifier < ActionMailer::Base
 
   def new_notification(recipient)
     @recipient = recipient
-    mail(:to => recipient, 
+    mail(:to => recipient.email, 
       	 :subject => 'New Notification',
          :content_type => 'text/html')
   end
