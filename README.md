@@ -27,9 +27,12 @@ Create the model and views using the generator:
 	rails generate notifier
 
 
-Place a call in the controller where notifications are created, after the notifcation is saved:
+Place a call in the controller where notifications should be created to loop through users emails, after the notifcation is saved:
 
-	Notifier.new_notification(@user).deliver_now
+	@users = User.all 
+    @users.each do |u| 
+      Notifier.new_notification(u.email).deliver_now
+    end
 
 
 ## Contributing
