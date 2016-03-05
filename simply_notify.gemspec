@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Tyler Lichten"]
   spec.email         = ["tlich10@gmail.com"]
 
-  spec.summary       = %q{Delivers email notifications to users of a Brandeis University course website}
-  spec.description   = %q{Delivers email notifications to users of a Brandeis University course website}
+  spec.summary       = %q{Delivers email notifications to users of a website}
+  spec.description   = %q{Delivers email notifications to users of a website}
   spec.homepage      = ""
   spec.license       = "MIT"
 
