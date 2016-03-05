@@ -7,7 +7,7 @@ describe NotifierGenerator, type: :generator do
     run_generator
   end
 
-  it "creates Model" do
+  it "creates Mailer" do
     assert_file "app/mailers/notifier.rb", "require 'simply_notify'"
   end
 

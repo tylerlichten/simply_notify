@@ -2,9 +2,9 @@ require "rails/generators"
 require "thor"
 
 class NotifierGenerator < Rails::Generators::Base
-  desc "This generator creates the Model and Views"
+  desc "This generator creates the Mailer and Views"
 
-  def create_model_file
+  def create_mailer_file
   	create_file "app/mailers/notifier.rb", "require 'simply_notify'"
   end 
 
