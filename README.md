@@ -22,30 +22,47 @@ Or install it yourself as:
 
 ## Usage
 
-Create the model and views using the generator:
+Step 1: Generate mailer and views.
 
 	rails generate notifier
 
 
-Place a call in the controller in which you want notifications to be created. For example, if you want each user to be notified when an assignment is created, use a call such as this:
+Step 2: Setup controller where you want then notifications to be created and URL link information. 
 
-	@users = User.all 
+For example, if you want each user to be notified when an assignment is created and a link to the homepage included in the email, use a call such as this (added to app/controllers/assignments_controller.rb)
+
+    # simply_notify: Most recent ID
+    most_recent_id = Assignment.maximum('id')
+
+    # simply_notify: Notification source URL link 
+    url = "http://localhost:3000/assignments/postlist?id=#{most_recent_id}"
+
+    # simply_notify: Deliver email to each user
+    # use nil as parameter if you want url link to be the homepage
+    # use url as parameter if you want url link to be the source of the notification
+    @users = User.all 
     @users.each do |u| 
-      Notifier.new_notification(u.email).deliver_now
+      Notifier.new_notification(u.email, url).deliver_now
     end
 
 
-Add config SMTP code to appropriate environments. For example, sending emails from a gmail account:
+Step 3: Configure SMTP settings and set homepage as absolute url.
+
+For example, sending emails from a gmail account (added to appropriate environments, such as config/environments/development.rb):
 
     # SMTP Config
+    config.absolute_site_url = 'http://localhost:3000/'  #set as your homepage
+    config.action_mailer.default_options = {
+    from: "YOUR_FROM_EMAIL@gmail.com"  #set as your from email
+    }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true 
     config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'gmail.com',
-    user_name:            'YOUR_USERNAME@gmail.com',
-    password:             'YOUR_PASSWORD',
+    user_name:            'YOUR_USERNAME@gmail.com',  #set as your email
+    password:             'YOUR_PASSWORD',  #set as your password
     authentication:       'plain',
     enable_starttls_auto: true  }
 

@@ -18,8 +18,9 @@ class NotifierGenerator < Rails::Generators::Base
         <body>
           <h1>Hello</h1>
           <p>
-            A new assignment has been posted! Please visit the course website.<br>
-            Thanks.<br>
+            A new assignment has been posted!<br><br>
+            Please visit the course website: <%= @url %><br><br>
+            Thanks!<br>
           </p>
         </body>
       </html>"
@@ -28,7 +29,9 @@ class NotifierGenerator < Rails::Generators::Base
   def create_text_view_file
     create_file "app/views/notifier/new_notification.text.erb", 
     "Hello, 
-      A new assignment has been posted! Please visit the course website.
-      Thanks."
+      A new assignment has been posted! 
+      Please visit the course website: <%= @url %>.
+      
+      Thanks!"
   end
 end

@@ -21,8 +21,9 @@ describe NotifierGenerator, type: :generator do
         <body>
           <h1>Hello</h1>
           <p>
-            A new assignment has been posted! Please visit the course website.<br>
-            Thanks.<br>
+            A new assignment has been posted!<br><br>
+            Please visit the course website: <%= @url %><br><br>
+            Thanks!<br>
           </p>
         </body>
       </html>"
@@ -31,7 +32,9 @@ describe NotifierGenerator, type: :generator do
   it "creates View for text" do
     assert_file "app/views/notifier/new_notification.text.erb", 
      "Hello, 
-      A new assignment has been posted! Please visit the course website.
-      Thanks."
+      A new assignment has been posted! 
+      Please visit the course website: <%= @url %>.
+      
+      Thanks!"
   end
 end
