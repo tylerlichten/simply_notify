@@ -9,12 +9,12 @@ describe SimplyNotify do
 	expect(ActionMailer::Base.deliveries.count).to eq(1)  
   end
 
-  it 'should send email to correct recipient' do
-    expect(ActionMailer::Base.deliveries.to).to eq(recipient)
+  it 'should send email to intended recipient' do
+    expect(ActionMailer::Base.deliveries.to).to eq(recipient.email)
   end
 
-  it 'should set subject to the correct subject' do
-    expect(ActionMailer::Base.deliveries.subject).to eq('New Notification')
+  it 'should set subject to the intended subject' do
+    expect(ActionMailer::Base.deliveries.subject).to eq(subject)
   end
 
   it 'should send email from correct email' do 
@@ -29,5 +29,9 @@ describe SimplyNotify do
   it 'should set url to source of notification if url parameter is not nil' do
     if url != nil
     expect(@url).to eq(url)
+  end
+
+  it 'should track notification analytics of intended recipient' do
+    expect(track user:).to eq(recipient)
   end
 end
