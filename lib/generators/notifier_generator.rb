@@ -57,7 +57,7 @@ class NotifierGenerator < Rails::Generators::Base
 
   def insert_association_user_model
     insert_into_file "app/models/user.rb",
-      "has_many :messages, class_name: \"Ahoy::Message\"",
-      after: "has_many :groups, through: :memberships"
+      "\n  has_many :messages, class_name: \"Ahoy::Message\"",
+      after: "class User < ActiveRecord::Base"
   end 
 end

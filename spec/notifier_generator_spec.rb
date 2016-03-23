@@ -60,6 +60,6 @@ describe NotifierGenerator, type: :generator do
 
   it "creates association in User model for ahoy_email" do 
     assert_file "app/models/user.rb",
-      "has_many :messages, class_name: \"Ahoy::Message\""
+      "\n  has_many :messages, class_name: \"Ahoy::Message\""
   end
 end
