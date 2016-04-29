@@ -31,7 +31,7 @@ describe SimplyNotify do
     expect(@url).to eq(url)
   end
 
-  it 'should track notification analytics of intended recipient' do
+  it 'should track emails for the intended recipient' do
     expect(track user:).to eq(recipient)
   end
 end

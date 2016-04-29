@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Tyler Lichten"]
   spec.email         = ["tlich10@gmail.com"]
 
-  spec.summary       = %q{Delivers notification emails to users of the website}
-  spec.description   = %q{Delivers notification emails to users of the website}
+  spec.summary       = %q{Delivers notifications by email to website users}
+  spec.description   = %q{Delivers notifications by email to website users}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -23,6 +23,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "thor"
   spec.add_runtime_dependency "ahoy_email"
   spec.add_runtime_dependency "ahoy_matey"
+  spec.add_runtime_dependency "whenever"
+  spec.add_runtime_dependency "devise"
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"

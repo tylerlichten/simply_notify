@@ -10,12 +10,16 @@ class Notifier < ActionMailer::Base
 
     if url.nil?
       @url = Rails.application.config.absolute_site_url
+      @notifications = Notification.all
+      @recipient = recipient
       mail(to: recipient.email, 
            subject: subject)
     else 
       @url = url
+      @notifications = Notification.all
+      @recipient = recipient
       mail(to: recipient.email, 
            subject: subject)
-    end 
+    end
   end
 end
