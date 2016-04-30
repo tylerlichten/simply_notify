@@ -1,6 +1,6 @@
 # SimplyNotify
 
-simply_notify allows users to set preferences on how they want to receive notifications. Notifications are sent to users via email using actionmailer. Users can set their account preferences to receive notifications either in real time or a list of notifications every 24 hours. Ahoy_email is used for email tracking. For more information on gem dependncies of simply_notify, check out the additional information section. 
+simply_notify allows users to set preferences on how they want to receive notifications. Notifications are sent to users via email using actionmailer. Users can set their account preferences to receive notifications either in real time or a list of notifications every 24 hours. Ahoy_email is used for email tracking. Depends on Devise for user authentication. For more information on gem dependncies of simply_notify, check out the additional information section. 
 
 # Installation
 
@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ###Step 1
 
-Generate mailer, views, and ahoy_email initializer.
+Generate mailer, email views, and ahoy_email initializer.
 
 	$ rails generate notifier
 
@@ -35,28 +35,28 @@ Generate ahoy_messages table.
 
 ###Step 3
 
-Generate notifications table.
+Add column to User table for notification frequency.
 
     $ rails g migration add_notificationFrequency_to_users notifificationFrequency:integer
     $ rake db:migrate
 
-notificationFrequency values:
-nil or 0 = user does not receive notifications via email
-1 = user receives notifications in real time via email
+notificationFrequency values:  
+nil or 0 = user does not receive notifications via email  
+1 = user receives notifications in real time via email  
 2 = user receives a list of notifications every 24 hours via email
 
 ###Step 4
 
-Generate notifications model.
+Generate Notification model.
     
     $ rails g model Notification recipient_id:integer creator_id:integer action:string url:string
     $ rake db:migrate
 
 ###Step 5 
 
-Generate notifications controller.
+Generate Notification controller.
 
-    $ rake g controller notifications
+    $ rails g controller notifications
 
 ###Step 6
 
@@ -67,7 +67,7 @@ Generate config/schedule.rb for cron jobs.
 
 ###Step 7
 
-Add create/mailer to create method in appropriate controllers, such as this example in controllers/assignments_controller.rb.
+Add Notification.create and Notifier.new_notification to the create method in appropriate controllers, such as this example in controllers/assignments_controller.rb.
 
     if Assignment.where(:id) != nil
       most_recent_id = Assignment.maximum(:id).next
@@ -151,7 +151,7 @@ Setup cron job frequency in config/schedule.rb.
       rake "cron:deliver_emails"
     end
 
-Create file as lib/tasks/cron.rake and set rake schedule.
+Create file as lib/tasks/cron.rake and setup cron rake.
 
     namespace :cron do
       desc "Send notification emails every 24 hours"
@@ -188,7 +188,7 @@ Add route to config/routes.rb.
 
 Add to notifications controller.
 
-    cclass NotificationsController < ApplicationController
+    class NotificationsController < ApplicationController
       before_action :authenticate_user!
 
       def index
